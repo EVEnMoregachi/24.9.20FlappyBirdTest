@@ -7,6 +7,8 @@ public class Enemy : MonoBehaviour
 {
     public GameObject bullettemplate;
     private Animator animator;
+    public ENEMY_TYPE enemyType;
+    public DAMAGE_POWER power = DAMAGE_POWER.Enemy_Hurt;
     public float Speed = 10f;
     public float FireRate = 2f;
     private float fireTime = 0f;
@@ -20,6 +22,10 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         this.transform.position += new Vector3(-Speed * Time.deltaTime, 0, 0);
+        if(this.enemyType == ENEMY_TYPE.Swing_Enemy)
+        {
+            this.transform.position = new Vector3(this.transform.position.x, Mathf.Sin(Time.time * 2f) * 2f, 0);
+        }
         Fire();
     }
 

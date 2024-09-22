@@ -6,6 +6,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public float speed = 15f;
+    public DAMAGE_POWER power = DAMAGE_POWER.Normal_Hurt;
     void Start()
     {
         

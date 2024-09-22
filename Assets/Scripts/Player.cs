@@ -81,9 +81,21 @@ public class Player : MonoBehaviour
     {
         Debug.Log(collision.gameObject.name);
 
-        if (collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.CompareTag("NormalBullet"))
         {
-            Game.instance.Damage(10f);
+            Bullet bullet = collision.GetComponent<Bullet>();
+            if (bullet != null)
+            {
+                Game.instance.Damage((float)bullet.power);
+            }
+        }
+        else if (collision.gameObject.CompareTag("Enemy"))
+        {
+            Enemy enemy = collision.GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                Game.instance.Damage((float)enemy.power);
+            }
         }
 
 
