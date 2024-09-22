@@ -8,7 +8,7 @@ public class Pipeline : MonoBehaviour
     public int PipeSpeed = 4;
     void Start()
     {
-        Destroy(this.gameObject, 8f);
+        Destroy(this.gameObject, 12f);
     }
 
     void Update()

@@ -26,8 +26,11 @@ public class Game : MonoBehaviour
     public TMP_Text scoreText;
     public TMP_Text endScoreText;
     public TMP_Text ensBestText;
+    public Slider HPSlider;
+    public float HP = 100f;
 
     public PipelineManager pipelineManager;
+    public UnitManager unitManager;
 
     public int score;
     public int best;
@@ -43,6 +46,10 @@ public class Game : MonoBehaviour
         UpdateUI();
         best = PlayerPrefs.GetInt("Best");
     }
+    private void Update()
+    {
+        HPSlider.value = Mathf.Lerp(this.HPSlider.value, HP, 0.02f);
+    }
 
     public void StartGame()
     {
@@ -50,6 +57,7 @@ public class Game : MonoBehaviour
         this.status = GAME_STATUS.Running;
         UpdateUI();
         pipelineManager.StartRun();
+        unitManager.StartRun();
         Player.instance.Fly();
     }
 
@@ -88,5 +96,14 @@ public class Game : MonoBehaviour
     {
         score += 1;
         UpdateUI();
+    }
+
+    public void Damage(float damage)
+    {
+        HP -= damage;
+        if (HP < 0)
+        {
+            GameOver();
+        }
     }
 }

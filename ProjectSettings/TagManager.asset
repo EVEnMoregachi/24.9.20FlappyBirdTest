@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Pipe
   - Line
+  - Enemy
   layers:
   - Default
   - TransparentFX

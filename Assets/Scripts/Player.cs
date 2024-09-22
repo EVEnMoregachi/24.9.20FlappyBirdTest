@@ -1,13 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Linq;
+using UnityEditor.UI;
 using UnityEngine;
+using UnityEngine.Scripting.APIUpdating;
 
 public class Player : MonoBehaviour
 {
     static public Player instance;
     private Rigidbody2D body;
     private Animator animator;
-    public float force = 300f;
+    public float Speed = 5f;
+    public GameObject bullettemplate;
+    public float FireRate = 10f;
+    private float fireTime = 0f;
+
     private void Awake()
     {
         instance = this;
@@ -21,11 +28,24 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && Game.instance.status == Game.GAME_STATUS.Running)
+        if (Game.instance.status == Game.GAME_STATUS.Running)
         {
-            body.velocity = Vector2.zero;
-            body.AddForce(new Vector2(0, force));
+            //body.velocity = Vector2.zero;
+            //body.AddForce(new Vector2(0, force));
+            //animator.SetTrigger("Fly");
+
             animator.SetTrigger("Fly");
+            animator.applyRootMotion = true;
+
+            Vector2 pos = this.transform.position;
+            pos.x += Input.GetAxis("Horizontal") * Time.deltaTime * Speed;
+            pos.y += Input.GetAxis("Vertical") * Time.deltaTime * Speed;
+            this.transform.position = pos;
+
+            if (Input.GetButton("Fire1"))
+            {
+                Fire();
+            }
         }
     }
 
@@ -33,27 +53,39 @@ public class Player : MonoBehaviour
     {
         animator.applyRootMotion = false;
         body.Sleep();
-        animator.SetTrigger("Idle");
 
+    }
+
+    private void Fire()
+    {
+        if (Time.time - this.fireTime > 1f / FireRate)
+        {
+            GameObject bullet = GameObject.Instantiate(bullettemplate);
+            bullet.transform.position = this.transform.position;
+            this.fireTime = Time.time;
+        }
     }
     public void Fly()
     {
-        animator.applyRootMotion = true;
-        body.WakeUp();
-        animator.SetTrigger("Fly");
-        body.velocity = Vector2.zero;
-        body.AddForce(new Vector2(0, force));
+        //animator.applyRootMotion = true;
+        //body.WakeUp();
+        //animator.SetTrigger("Fly");
+        //body.velocity = Vector2.zero;
+        //body.AddForce(new Vector2(0, force));
+
+        
+
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Line")
+        Debug.Log(collision.gameObject.name);
+
+        if (collision.gameObject.tag == "Enemy")
         {
-            Game.instance.GetPoint();
+            Game.instance.Damage(10f);
         }
-        else
-        {
-            Game.instance.GameOver();
-        }
+
+
     }
 }
