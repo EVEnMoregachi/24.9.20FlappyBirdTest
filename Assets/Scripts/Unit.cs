@@ -4,15 +4,39 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public float Speed = 5f;
+    public GameObject bullettemplate;
+    public Animator animator;
+    public float FireRate = 10f;
+    public float fireTime = 0f;
+
     void Start()
+    {
+        animator = GetComponent<Animator>();
+
+        OnStart();
+    }
+    void Update()
+    {
+        OnUpdate();
+    }
+
+    public virtual void OnStart()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public virtual void OnUpdate()
     {
-        
+
+    }
+    public void Fire()
+    {
+        if (Time.time - this.fireTime > 1f / FireRate)
+        {
+            GameObject bullet = GameObject.Instantiate(bullettemplate);
+            bullet.transform.position = this.transform.position;
+            this.fireTime = Time.time;
+        }
     }
 }

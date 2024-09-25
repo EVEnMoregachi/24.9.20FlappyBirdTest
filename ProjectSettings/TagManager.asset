@@ -7,6 +7,7 @@ TagManager:
   - Pipe
   - Line
   - Enemy
+  - NormalBullet
   layers:
   - Default
   - TransparentFX

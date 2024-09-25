@@ -5,28 +5,23 @@ using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.Scripting.APIUpdating;
 
-public class Player : MonoBehaviour
+public class Player : Unit
 {
     static public Player instance;
     private Rigidbody2D body;
-    private Animator animator;
-    public float Speed = 5f;
-    public GameObject bullettemplate;
-    public float FireRate = 10f;
-    private float fireTime = 0f;
+    
 
     private void Awake()
     {
         instance = this;
     }
-    void Start()
+    public override void OnStart()
     {
         body = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
         Idle();
     }
 
-    void Update()
+    public override void OnUpdate()
     {
         if (Game.instance.status == Game.GAME_STATUS.Running)
         {
@@ -56,15 +51,6 @@ public class Player : MonoBehaviour
 
     }
 
-    private void Fire()
-    {
-        if (Time.time - this.fireTime > 1f / FireRate)
-        {
-            GameObject bullet = GameObject.Instantiate(bullettemplate);
-            bullet.transform.position = this.transform.position;
-            this.fireTime = Time.time;
-        }
-    }
     public void Fly()
     {
         //animator.applyRootMotion = true;
@@ -79,25 +65,24 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.gameObject.name);
-
         if (collision.gameObject.CompareTag("NormalBullet"))
         {
-            Bullet bullet = collision.GetComponent<Bullet>();
-            if (bullet != null)
+            Bullet hurt = collision.GetComponent<Bullet>();
+            if (hurt != null)
             {
-                Game.instance.Damage((float)bullet.power);
+                Debug.Log("±»»÷ÖÐ");
+
+                Game.instance.Damage((float)hurt.power);
             }
         }
         else if (collision.gameObject.CompareTag("Enemy"))
         {
-            Enemy enemy = collision.GetComponent<Enemy>();
-            if (enemy != null)
+            Enemy hurt = collision.GetComponent<Enemy>();
+            if (hurt != null)
             {
-                Game.instance.Damage((float)enemy.power);
+                Game.instance.Damage((float)hurt.power);
             }
         }
-
 
     }
 }

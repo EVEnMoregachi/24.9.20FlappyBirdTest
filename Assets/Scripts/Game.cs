@@ -29,7 +29,7 @@ public class Game : MonoBehaviour
     public Slider HPSlider;
     public float HP = 100f;
 
-    public PipelineManager pipelineManager;
+    //public PipelineManager pipelineManager;
     public UnitManager unitManager;
 
     public int score;
@@ -56,7 +56,7 @@ public class Game : MonoBehaviour
         score = 0;
         this.status = GAME_STATUS.Running;
         UpdateUI();
-        pipelineManager.StartRun();
+        //pipelineManager.StartRun();
         unitManager.StartRun();
         Player.instance.Fly();
     }
@@ -85,7 +85,7 @@ public class Game : MonoBehaviour
     public void ReStartGame()
     {
         score = 0;
-        PipelineManager.instance.DestoryAllPipes();
+        //PipelineManager.instance.DestoryAllPipes();
         Time.timeScale = 1;
         this.status = GAME_STATUS.Running;
         UpdateUI();
@@ -100,8 +100,9 @@ public class Game : MonoBehaviour
 
     public void Damage(float damage)
     {
+        Debug.Log(damage);
         HP -= damage;
-        if (HP < 0)
+        if (HP <= 0)
         {
             GameOver();
         }

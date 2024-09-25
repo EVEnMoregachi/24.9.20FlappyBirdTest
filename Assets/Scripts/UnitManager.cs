@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal.Profiling.Memory.Experimental.FileFormat;
 using UnityEngine;
 
 public class UnitManager : MonoBehaviour
@@ -7,6 +8,7 @@ public class UnitManager : MonoBehaviour
     public GameObject enemy1;
     public GameObject enemy2;
     public GameObject enemy3;
+    public GameObject warning;
 
     Coroutine coroutine = null;
 
@@ -35,6 +37,7 @@ public class UnitManager : MonoBehaviour
             if (timer2 >= 2)
             {
                 CreateEnemy(enemy2);
+
                 timer2 = 0;
             }
             if (timer3 >= 4)
