@@ -9,7 +9,6 @@ public class Player : Unit
 {
     static public Player instance;
     private Rigidbody2D body;
-    
 
     private void Awake()
     {
@@ -65,14 +64,14 @@ public class Player : Unit
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("NormalBullet"))
+        if (collision.gameObject.CompareTag("Bullet"))
         {
-            Bullet hurt = collision.GetComponent<Bullet>();
+            Bul hurt = collision.GetComponent<Bul>();
             if (hurt != null)
             {
-                Debug.Log("±»»÷ÖÐ");
-
-                Game.instance.Damage((float)hurt.power);
+                this.HP -= (float)hurt.power;
+                Game.instance.flashHP(this.HP);
+                Destroy(hurt.gameObject);
             }
         }
         else if (collision.gameObject.CompareTag("Enemy"))
@@ -80,7 +79,8 @@ public class Player : Unit
             Enemy hurt = collision.GetComponent<Enemy>();
             if (hurt != null)
             {
-                Game.instance.Damage((float)hurt.power);
+                this.HP -= (float)hurt.power;
+                Game.instance.flashHP(this.HP);
             }
         }
 

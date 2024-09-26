@@ -217,10 +217,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c2ff99a00f805842822066760ea3ab0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullettemplate: {fileID: 1769487763756492317, guid: aa120a9b35668a1459ca87cff0fbf72e, type: 3}
-  enemyType: 2
   Speed: 20
+  bullettemplate: {fileID: 1769487763756492317, guid: aa120a9b35668a1459ca87cff0fbf72e, type: 3}
+  animator: {fileID: 0}
+  firePoint1: {fileID: 872677633242226744}
   FireRate: 0
+  fireTime: 0
+  HP: 10
+  enemyType: 2
+  power: 30
 --- !u!95 &7842525060255956026
 Animator:
   serializedVersion: 5

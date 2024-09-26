@@ -1,18 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
+using System.Threading;
 using UnityEngine;
 
-public class Bullet : Bul
+public class Bullet3 : Bul
 {
+    public Vector3 ret;
     public override void OnStart()
     {
-        
+        this.transform.rotation = Quaternion.FromToRotation(Vector3.left, ret);
     }
-
     public override void OnUpdate()
     {
-        this.transform.position += new Vector3(speed * Time.deltaTime, 0, 0);
+        this.transform.position += ret * speed * Time.deltaTime;
 
         if (Screen.safeArea.Contains(Camera.main.WorldToScreenPoint(this.transform.position)) == false)
         {

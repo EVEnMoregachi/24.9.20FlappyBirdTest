@@ -7,8 +7,10 @@ public class Unit : MonoBehaviour
     public float Speed = 5f;
     public GameObject bullettemplate;
     public Animator animator;
+    public Transform firePoint1;
     public float FireRate = 10f;
-    public float fireTime = 0f;
+    protected float fireTime = 0f;
+    public float HP = 10f;
 
     void Start()
     {
@@ -35,8 +37,10 @@ public class Unit : MonoBehaviour
         if (Time.time - this.fireTime > 1f / FireRate)
         {
             GameObject bullet = GameObject.Instantiate(bullettemplate);
-            bullet.transform.position = this.transform.position;
+            bullet.transform.position = this.firePoint1.position;
             this.fireTime = Time.time;
         }
     }
+
+
 }

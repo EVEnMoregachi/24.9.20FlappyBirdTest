@@ -2,20 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rocket : MonoBehaviour
+public class Rocket : Bul
 {
-    public float speed = 15f;
     public float tarkingTime = 3f;
     private float timer = 0f;
-    public DAMAGE_POWER power = DAMAGE_POWER.Rocket_Hurt;
     public Transform target;
     private Vector3 ret;
-    void Start()
+    public override void OnStart()
     {
         Destroy(this.gameObject, 10f);
     }
 
-     void Update()
+    public override void OnUpdate()
     {
         timer += Time.deltaTime;
         if (timer < tarkingTime)

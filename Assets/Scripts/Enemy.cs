@@ -27,11 +27,25 @@ public class Enemy : Unit
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
         if (collision.gameObject.tag == "Player")
         {
-            animator.SetTrigger("Dead");
-            Destroy(this.gameObject, 0.2f);
+            Bullet hurt = collision.GetComponent<Bullet>();
+            if (hurt != null)
+            {
+                this.HP -= (float)hurt.power;
+                Destroy(hurt.gameObject);
+            }
+        }
+        if (this.HP <= 0)
+        {
+            Dead();
         }
     }
+
+    public virtual void Dead()
+    {
+        this.animator.SetTrigger("Dead");
+        Destroy(this.gameObject, 0.2f);
+    }
+
 }

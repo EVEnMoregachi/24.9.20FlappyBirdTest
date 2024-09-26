@@ -7,6 +7,9 @@ using UnityEngine.UI;
 public class Game : MonoBehaviour
 {
     static public Game instance;
+    public int currentLevelID = 1;
+    
+
     private void Awake()
     {
         instance = this;
@@ -27,10 +30,13 @@ public class Game : MonoBehaviour
     public TMP_Text endScoreText;
     public TMP_Text ensBestText;
     public Slider HPSlider;
+    public float MAX_HP = 100f;
     public float HP = 100f;
 
     //public PipelineManager pipelineManager;
     public UnitManager unitManager;
+    public LevelManager levelManager;
+    public Player player;
 
     public int score;
     public int best;
@@ -45,10 +51,12 @@ public class Game : MonoBehaviour
         this.status = GAME_STATUS.Ready;
         UpdateUI();
         best = PlayerPrefs.GetInt("Best");
+
+        
     }
     private void Update()
     {
-        HPSlider.value = Mathf.Lerp(this.HPSlider.value, HP, 0.02f);
+        HPSlider.value = Mathf.Lerp(this.HPSlider.value, this.HP, 0.02f);
     }
 
     public void StartGame()
@@ -57,8 +65,12 @@ public class Game : MonoBehaviour
         this.status = GAME_STATUS.Running;
         UpdateUI();
         //pipelineManager.StartRun();
-        unitManager.StartRun();
+        //unitManager.StartRun();
         Player.instance.Fly();
+
+        this.levelManager.unitManager = this.unitManager;
+        this.levelManager.currentplayer = this.player;
+        this.levelManager.LoadLevel(this.currentLevelID);
     }
 
     public void UpdateUI()
@@ -90,6 +102,7 @@ public class Game : MonoBehaviour
         this.status = GAME_STATUS.Running;
         UpdateUI();
         Player.instance.Fly();
+        HP = MAX_HP;
     }
 
     public void GetPoint()
@@ -98,11 +111,10 @@ public class Game : MonoBehaviour
         UpdateUI();
     }
 
-    public void Damage(float damage)
+    public void flashHP(float HP)
     {
-        Debug.Log(damage);
-        HP -= damage;
-        if (HP <= 0)
+        this.HP = HP;
+        if (this.HP <= 0)
         {
             GameOver();
         }

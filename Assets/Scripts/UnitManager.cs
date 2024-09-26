@@ -8,7 +8,6 @@ public class UnitManager : MonoBehaviour
     public GameObject enemy1;
     public GameObject enemy2;
     public GameObject enemy3;
-    public GameObject warning;
 
     Coroutine coroutine = null;
 
@@ -52,10 +51,15 @@ public class UnitManager : MonoBehaviour
         }
     }
 
-    private void CreateEnemy(GameObject enemytype)
+    public Enemy CreateEnemy(GameObject enemytype)
     {
+        if (enemytype == null)
+            return null;
+
         float y = Random.Range(3f, -3f);
-        GameObject enemy = GameObject.Instantiate(enemytype, new Vector3(this.transform.position.x, this.transform.position.y + y, 0), Quaternion.identity, this.transform);
+        GameObject go = GameObject.Instantiate(enemytype, new Vector3(this.transform.position.x, this.transform.position.y + y, 0), Quaternion.identity, this.transform);
+        Enemy enemy = go.GetComponent<Enemy>();
+        return enemy;
     }
 
     public void DestoryAllEnemys()
