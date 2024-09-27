@@ -222,7 +222,6 @@ MonoBehaviour:
   animator: {fileID: 0}
   firePoint1: {fileID: 872677633242226744}
   FireRate: 0
-  fireTime: 0
   HP: 10
   enemyType: 2
   power: 30

@@ -858,10 +858,11 @@ MonoBehaviour:
   bullettemplate: {fileID: 1769487763756492317, guid: aa120a9b35668a1459ca87cff0fbf72e, type: 3}
   animator: {fileID: 0}
   firePoint1: {fileID: 5577142422569831269}
-  FireRate: 1
-  HP: 1000
+  FireRate: 3
+  HP: 3000
   enemyType: 3
-  power: 50
+  power: 150
+  isDead: 0
   missileTemplate: {fileID: 7907417298376909850, guid: 572c02170b25f254885f957770142433, type: 3}
   bullet3: {fileID: 987193468860087453, guid: 3b452a7279db1ba43b179c69f4cde301, type: 3}
   gun2: {fileID: 7215312854590857615}
@@ -870,6 +871,8 @@ MonoBehaviour:
   target: {fileID: 0}
   FireRate2: 0.25
   FireRate3: 0.2
+  rushCD: 15
+  MAX_HP: 3000
 --- !u!1001 &6046036405091928580
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -8,6 +8,7 @@ public class Game : MonoBehaviour
 {
     static public Game instance;
     public int currentLevelID = 1;
+    public bool GameSuccess = false;
     
 
     private void Awake()
@@ -18,7 +19,8 @@ public class Game : MonoBehaviour
     { 
         Ready,
         Running,
-        GameOver
+        GameOver,
+        GameSuccess,
     }
 
     public GAME_STATUS status;
@@ -29,9 +31,10 @@ public class Game : MonoBehaviour
     public TMP_Text scoreText;
     public TMP_Text endScoreText;
     public TMP_Text ensBestText;
+    public TMP_Text isSuccess;
     public Slider HPSlider;
-    public float MAX_HP = 100f;
-    public float HP = 100f;
+    public float MAX_HP = 500f;
+    public float HP = 500f;
 
     //public PipelineManager pipelineManager;
     public UnitManager unitManager;
@@ -80,6 +83,10 @@ public class Game : MonoBehaviour
         this.panelRunning.SetActive(this.status == GAME_STATUS.Running);
         endScoreText.SetText(score.ToString());
         ensBestText.SetText(best.ToString());
+        if (this.GameSuccess)
+            isSuccess.SetText("你 过 关！");
+        else
+            isSuccess.SetText("菜就多练");
         this.panelGameOver.SetActive(this.status == GAME_STATUS.GameOver);
     }
     public void GameOver()
@@ -105,9 +112,9 @@ public class Game : MonoBehaviour
         HP = MAX_HP;
     }
 
-    public void GetPoint()
+    public void GetPoint(int value)
     {
-        score += 1;
+        score += value;
         UpdateUI();
     }
 

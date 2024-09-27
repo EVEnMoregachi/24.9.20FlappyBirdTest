@@ -16,5 +16,6 @@ public enum DAMAGE_POWER{
     Ray_Hurt = 10,
     Rocket_Hurt = 50,
     Bullet3_Hurt = 20,
+    Boss_Hurt = 150,
 }
 

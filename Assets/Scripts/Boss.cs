@@ -16,10 +16,14 @@ public class Boss : Enemy
     public float FireRate2 = 1f;
     private float fireTime3 = 0f;
     public float FireRate3 = 0.2f;
+    public float rushCD = 15f;
+    private float rushTimer = 0f;
+    public float MAX_HP = 500f;
 
     GameObject missile = null;
     public override void OnStart()
     {
+        this.HP = this.MAX_HP;
         StartCoroutine(Enter());
         //StartCoroutine(FireMissile());
         //StartCoroutine(Fire2());
@@ -42,8 +46,15 @@ public class Boss : Enemy
         while(true)
         {
             Fire();
+            MoveToAim();
             Fire2();
             FireMissile();
+            rushTimer += Time.deltaTime;
+            if (this.HP < (this.MAX_HP / 2) && rushTimer > rushCD)
+            {
+                rushTimer = 0f;
+                yield return RushAttack();
+            }
             yield return null;
         }
     }
@@ -61,6 +72,19 @@ public class Boss : Enemy
             yield return null;
         }
     }
+
+    IEnumerator RushAttack()
+    {
+        yield return MoveTo(new Vector3(6.5f, target.position.y, 0));
+        this.Speed = 20f;
+        yield return MoveTo(new Vector3(-15, this.transform.position.y, 0));
+        this.Speed = 4f;
+        this.transform.position = new Vector3(15, 0, 0);
+        yield return MoveTo(new Vector3(5, 0, 0));
+        this.Speed = 2f;
+        yield return Attack();
+    }
+
     private void FireMissile()
     {
         if (Time.time - this.fireTime3 > 1f / this.FireRate3)
@@ -69,6 +93,19 @@ public class Boss : Enemy
             this.fireTime3 = Time.time;
         }
     }
+
+    public void MoveToAim()
+    {
+        if (firePoint1.position.y < target.position.y)
+        {
+            this.transform.position += Vector3.up * Time.deltaTime;
+        }
+        else if (firePoint1.position.y > target.position.y)
+        {
+            this.transform.position += Vector3.down * Time.deltaTime;
+        }
+    }
+
 
     private void Fire2()
     {
@@ -97,6 +134,10 @@ public class Boss : Enemy
 
     public override void Dead()
     {
+        if (this.gameObject.name == "Boss(Clone)")
+        {
+            Game.instance.GetPoint(50);
+        }
         this.animator.SetTrigger("BossDead");
         Destroy(this.gameObject, 0.2f);
     }

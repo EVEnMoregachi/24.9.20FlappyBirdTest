@@ -8,6 +8,7 @@ public class Enemy : Unit
     
     public ENEMY_TYPE enemyType;
     public DAMAGE_POWER power = DAMAGE_POWER.Enemy_Hurt;
+    public bool isDead = false;
     
 
     public override void OnStart()
@@ -36,14 +37,27 @@ public class Enemy : Unit
                 Destroy(hurt.gameObject);
             }
         }
-        if (this.HP <= 0)
+        if (this.HP <= 0 && !isDead)
         {
+            isDead = true;
             Dead();
         }
     }
 
     public virtual void Dead()
     {
+        if (this.gameObject.name == "Enemy(Clone)")
+        {
+            Game.instance.GetPoint(1);
+        }
+        else if (this.gameObject.name == "Enemy2(Clone)")
+        {
+            Game.instance.GetPoint(2);
+        }
+        else if (this.gameObject.name == "Enemy3(Clone)")
+        {
+            Game.instance.GetPoint(3);
+        }
         this.animator.SetTrigger("Dead");
         Destroy(this.gameObject, 0.2f);
     }

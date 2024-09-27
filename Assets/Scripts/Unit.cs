@@ -32,7 +32,7 @@ public class Unit : MonoBehaviour
     {
 
     }
-    public void Fire()
+    public virtual void Fire()
     {
         if (Time.time - this.fireTime > 1f / FireRate)
         {

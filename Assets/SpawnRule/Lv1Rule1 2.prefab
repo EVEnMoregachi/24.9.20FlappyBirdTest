@@ -47,6 +47,7 @@ MonoBehaviour:
   Monster: {fileID: 6831799516755340173, guid: 4ab8e134b03b13e4c9c6744c71bca338, type: 3}
   InitTime: 10
   Period: 3
-  MaxNum: 15
+  MaxNum: 16
   HP: 20
   Attack: 1
+  unitManager: {fileID: 0}

@@ -17,11 +17,12 @@ public class Level : MonoBehaviour
 
     private float timeSinceLevelStart = 0f;
     private float levelStartTime = 0f;
-    float bossTime = 1f;
-    float timer = 0f;
+    float bossTime = 60f;
+    //float timer = 0f;
 
     public Player currentplayer;
 
+    bool isBossCreated = false;
     Boss boss = null;
     void Start()
     {
@@ -38,10 +39,19 @@ public class Level : MonoBehaviour
 
         if (timeSinceLevelStart > bossTime)
         {
-            if (boss == null)
+            if (isBossCreated == false)
             {
-                boss = (Boss)unitManager.CreateEnemy(this.bossPrefab.gameObject);
-                boss.target = currentplayer.transform;
+                isBossCreated = true;
+                this.boss = (Boss)unitManager.CreateEnemy(this.bossPrefab.gameObject);
+                this.boss.target = currentplayer.transform;
+            }
+            else if(isBossCreated == true)
+            {
+                if (this.boss == null)
+                {
+                    Game.instance.GameSuccess = true;
+                    Game.instance.GameOver();
+                }
             }
         }
     }

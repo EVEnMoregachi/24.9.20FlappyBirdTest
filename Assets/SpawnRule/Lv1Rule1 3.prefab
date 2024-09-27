@@ -45,8 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Monster: {fileID: 6831799516755340173, guid: 09a43dd788c29cf459d3757c6c696e1d, type: 3}
-  InitTime: 5
-  Period: 5
-  MaxNum: 10
-  HP: 30
+  InitTime: 30
+  Period: 4
+  MaxNum: 7
+  HP: 10
   Attack: 1
+  unitManager: {fileID: 0}
