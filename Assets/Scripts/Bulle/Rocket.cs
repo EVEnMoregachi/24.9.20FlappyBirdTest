@@ -23,11 +23,5 @@ public class Rocket : Bul
             this.transform.rotation = Quaternion.FromToRotation(Vector3.right, ret);
         }
         this.transform.position += speed * Time.deltaTime * ret;
-        
-
-        if (Screen.safeArea.Contains(Camera.main.WorldToScreenPoint(this.transform.position)) == false)
-        {
-            Destroy(this.gameObject, 1f);
-        }
     }
 }

@@ -7,13 +7,8 @@ using UnityEngine.Scripting.APIUpdating;
 
 public class Player : Unit
 {
-    static public Player instance;
     private Rigidbody2D body;
 
-    private void Awake()
-    {
-        instance = this;
-    }
     public override void OnStart()
     {
         body = GetComponent<Rigidbody2D>();
@@ -22,12 +17,8 @@ public class Player : Unit
 
     public override void OnUpdate()
     {
-        if (Game.instance.status == Game.GAME_STATUS.Running)
+        if (Game.Instance.status == Game.GAME_STATUS.Running)
         {
-            //body.velocity = Vector2.zero;
-            //body.AddForce(new Vector2(0, force));
-            //animator.SetTrigger("Fly");
-
             animator.SetTrigger("Fly");
             animator.applyRootMotion = true;
 
@@ -47,19 +38,6 @@ public class Player : Unit
     {
         animator.applyRootMotion = false;
         body.Sleep();
-
-    }
-
-    public void Fly()
-    {
-        //animator.applyRootMotion = true;
-        //body.WakeUp();
-        //animator.SetTrigger("Fly");
-        //body.velocity = Vector2.zero;
-        //body.AddForce(new Vector2(0, force));
-
-        
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -70,7 +48,7 @@ public class Player : Unit
             if (hurt != null)
             {
                 this.HP -= (float)hurt.power;
-                Game.instance.flashHP(this.HP);
+                Game.Instance.flashHP(this.HP);
                 Destroy(hurt.gameObject);
             }
         }
@@ -80,9 +58,8 @@ public class Player : Unit
             if (hurt != null)
             {
                 this.HP -= (float)hurt.power;
-                Game.instance.flashHP(this.HP);
+                Game.Instance.flashHP(this.HP);
             }
         }
-
     }
 }

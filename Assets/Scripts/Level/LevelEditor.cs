@@ -8,8 +8,6 @@ using UnityEditor;
 public class LevelEditor : Editor
 {
     Level level;
-
-
     Vector2 scrollPos;
     public override void OnInspectorGUI()
     {

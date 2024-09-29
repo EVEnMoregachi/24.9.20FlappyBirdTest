@@ -18,6 +18,7 @@ public class Boss : Enemy
     public float FireRate3 = 0.2f;
     public float rushCD = 15f;
     private float rushTimer = 0f;
+    public float RushSpeed = 30f;
     public float MAX_HP = 500f;
 
     GameObject missile = null;
@@ -25,8 +26,6 @@ public class Boss : Enemy
     {
         this.HP = this.MAX_HP;
         StartCoroutine(Enter());
-        //StartCoroutine(FireMissile());
-        //StartCoroutine(Fire2());
     }
     public override void OnUpdate()
     {
@@ -75,8 +74,8 @@ public class Boss : Enemy
 
     IEnumerator RushAttack()
     {
-        yield return MoveTo(new Vector3(6.5f, target.position.y, 0));
-        this.Speed = 20f;
+        yield return MoveTo(new Vector3(6f, target.position.y, 0));
+        this.Speed = this.RushSpeed;
         yield return MoveTo(new Vector3(-15, this.transform.position.y, 0));
         this.Speed = 4f;
         this.transform.position = new Vector3(15, 0, 0);
@@ -106,7 +105,6 @@ public class Boss : Enemy
         }
     }
 
-
     private void Fire2()
     {
         if (Time.time - this.fireTime2 > 1f / this.FireRate2)
@@ -116,13 +114,6 @@ public class Boss : Enemy
             bullet.ret = this.ret2;
             this.fireTime2 = Time.time;
         }
-        //while (true)
-        //{
-        //    yield return new WaitForSeconds(2f);
-        //    GameObject go = GameObject.Instantiate(bullet3, this.firePoint2.position , Quaternion.identity, null);
-        //    Bullet3 bullet = go.GetComponent<Bullet3>();
-        //    bullet.ret = this.ret2;
-        //}
     }
 
     public void OnMissileLoad()
@@ -136,10 +127,9 @@ public class Boss : Enemy
     {
         if (this.gameObject.name == "Boss(Clone)")
         {
-            Game.instance.GetPoint(50);
+            Game.Instance.GetPoint(50);
         }
         this.animator.SetTrigger("BossDead");
         Destroy(this.gameObject, 0.2f);
     }
-
 }

@@ -1,20 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Game : MonoBehaviour
+public class Game : MonoSingleton<Game>
 {
-    static public Game instance;
     public int currentLevelID = 1;
     public bool GameSuccess = false;
-    
 
-    private void Awake()
-    {
-        instance = this;
-    }
     public enum GAME_STATUS
     { 
         Ready,
@@ -22,8 +17,6 @@ public class Game : MonoBehaviour
         GameOver,
         GameSuccess,
     }
-
-    public GAME_STATUS status;
 
     public GameObject panelReady;
     public GameObject panelRunning;
@@ -34,15 +27,11 @@ public class Game : MonoBehaviour
     public TMP_Text isSuccess;
     public Slider HPSlider;
     public float MAX_HP = 500f;
-    public float HP = 500f;
-
-    //public PipelineManager pipelineManager;
-    public UnitManager unitManager;
-    public LevelManager levelManager;
+    public float HP;
     public Player player;
-
     public int score;
     public int best;
+    public GAME_STATUS status;
 
     public GAME_STATUS Status 
     { 
@@ -51,11 +40,12 @@ public class Game : MonoBehaviour
     }
     void Start()
     {
+        this.MAX_HP = Player.Instance.HP;
+        this.HP = this.MAX_HP;
+        this.HPSlider.maxValue = this.MAX_HP;
         this.status = GAME_STATUS.Ready;
         UpdateUI();
         best = PlayerPrefs.GetInt("Best");
-
-        
     }
     private void Update()
     {
@@ -67,13 +57,7 @@ public class Game : MonoBehaviour
         score = 0;
         this.status = GAME_STATUS.Running;
         UpdateUI();
-        //pipelineManager.StartRun();
-        //unitManager.StartRun();
-        Player.instance.Fly();
-
-        this.levelManager.unitManager = this.unitManager;
-        this.levelManager.currentplayer = this.player;
-        this.levelManager.LoadLevel(this.currentLevelID);
+        LevelManager.Instance.LoadLevel(this.currentLevelID);
     }
 
     public void UpdateUI()
@@ -103,13 +87,13 @@ public class Game : MonoBehaviour
 
     public void ReStartGame()
     {
+        //Õ£”√
         score = 0;
-        //PipelineManager.instance.DestoryAllPipes();
         Time.timeScale = 1;
         this.status = GAME_STATUS.Running;
         UpdateUI();
-        Player.instance.Fly();
         HP = MAX_HP;
+        Player.Instance.HP = MAX_HP;
     }
 
     public void GetPoint(int value)

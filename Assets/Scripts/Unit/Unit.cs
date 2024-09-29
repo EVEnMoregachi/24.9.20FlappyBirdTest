@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Unit : MonoBehaviour
+public class Unit : MonoSingleton<Unit>
 {
     public float Speed = 5f;
     public GameObject bullettemplate;

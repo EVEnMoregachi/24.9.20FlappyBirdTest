@@ -5,11 +5,9 @@ using UnityEngine.Scripting.APIUpdating;
 
 public class Enemy : Unit
 {
-    
     public ENEMY_TYPE enemyType;
     public DAMAGE_POWER power = DAMAGE_POWER.Enemy_Hurt;
     public bool isDead = false;
-    
 
     public override void OnStart()
     {
@@ -48,18 +46,17 @@ public class Enemy : Unit
     {
         if (this.gameObject.name == "Enemy(Clone)")
         {
-            Game.instance.GetPoint(1);
+            Game.Instance.GetPoint(1);
         }
         else if (this.gameObject.name == "Enemy2(Clone)")
         {
-            Game.instance.GetPoint(2);
+            Game.Instance.GetPoint(2);
         }
         else if (this.gameObject.name == "Enemy3(Clone)")
         {
-            Game.instance.GetPoint(3);
+            Game.Instance.GetPoint(3);
         }
         this.animator.SetTrigger("Dead");
         Destroy(this.gameObject, 0.2f);
     }
-
 }

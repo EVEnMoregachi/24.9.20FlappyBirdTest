@@ -13,9 +13,7 @@ public enum ENEMY_TYPE
 public enum DAMAGE_POWER{
     Normal_Hurt = 10,
     Enemy_Hurt = 30,
-    Ray_Hurt = 10,
     Rocket_Hurt = 50,
     Bullet3_Hurt = 20,
     Boss_Hurt = 150,
 }
-

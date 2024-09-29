@@ -5,18 +5,14 @@ using UnityEngine;
 public class SpawnRule : MonoBehaviour
 {
 
-    public Unit Monster;
-    public float InitTime;
-    public float Period;
-    public int MaxNum;
-    public int HP;
-    public int Attack;
+    public Unit Monster;//怪物的模板
+    public float InitTime;//开始刷怪时间
+    public float Period;//刷怪间隔
+    public int MaxNum;//刷怪的数量
+    public int HP;//怪物血量
 
     private float timeSinceLevelStart = 0f;
     private float levelStartTime = 0f;
-
-    public UnitManager unitManager;
-
 
     int num = 0;
     float timer = 0;
@@ -39,14 +35,10 @@ public class SpawnRule : MonoBehaviour
             if (timer >= Period)
             {
                 timer = 0f;
-                Enemy enemy = unitManager.CreateEnemy(this.Monster.gameObject);
+                Enemy enemy = UnitManager.Instance.CreateEnemy(this.Monster.gameObject);
                 enemy.HP = this.HP;
                 num++;
             }
-
-
         }
-
-
     }
 }

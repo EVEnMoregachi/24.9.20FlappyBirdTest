@@ -13,6 +13,10 @@ public class Bul : MonoBehaviour
 
     void Update()
     {
+        if (!Singleton<GameUtil>.Instance.InScream(this.transform.position))
+        {
+            Destroy(this.gameObject, 1f);
+        }
         OnUpdate();
     }
 

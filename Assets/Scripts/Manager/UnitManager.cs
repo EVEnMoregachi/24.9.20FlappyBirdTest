@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditorInternal.Profiling.Memory.Experimental.FileFormat;
 using UnityEngine;
 
-public class UnitManager : MonoBehaviour
+public class UnitManager : MonoSingleton<UnitManager>
 {
     public GameObject enemy1;
     public GameObject enemy2;
@@ -11,44 +11,9 @@ public class UnitManager : MonoBehaviour
 
     Coroutine coroutine = null;
 
-    public void StartRun()
-    {
-        coroutine = StartCoroutine(CreateEnemys());
-    }
-
     public void Stop()
     {
         StopCoroutine(coroutine);
-    }
-
-    float timer1 = 0;
-    float timer2 = 0;
-    float timer3 = 0;
-    IEnumerator CreateEnemys()
-    {
-        while (true)
-        {
-            if (timer1 >= 1)
-            {
-                CreateEnemy(enemy1);
-                timer1 = 0;
-            }
-            if (timer2 >= 2)
-            {
-                CreateEnemy(enemy2);
-
-                timer2 = 0;
-            }
-            if (timer3 >= 4)
-            {
-                CreateEnemy(enemy3);
-                timer3 = 0;
-            }
-            timer1++;
-            timer2++;
-            timer3++;
-            yield return new WaitForSeconds(1f);
-        }
     }
 
     public Enemy CreateEnemy(GameObject enemytype)

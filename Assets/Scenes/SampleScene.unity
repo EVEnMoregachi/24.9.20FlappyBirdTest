@@ -517,7 +517,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   firePoint1: {fileID: 1656515222}
   FireRate: 10
-  HP: 300
+  HP: 500
 --- !u!1 &248470621
 GameObject:
   m_ObjectHideFlags: 0
@@ -840,7 +840,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: eb8bacd46357fb4418b3d529965e7b08, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2979193228837331801, guid: eb8bacd46357fb4418b3d529965e7b08, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -904,7 +904,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &287875102
@@ -1943,7 +1943,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentLevelID: 1
   GameSuccess: 0
-  status: 0
   panelReady: {fileID: 1897713287}
   panelRunning: {fileID: 280727499}
   panelGameOver: {fileID: 1564160202}
@@ -1954,11 +1953,10 @@ MonoBehaviour:
   HPSlider: {fileID: 981752402}
   MAX_HP: 100
   HP: 300
-  unitManager: {fileID: 139767945}
-  levelManager: {fileID: 1583016764}
   player: {fileID: 189396281}
   score: 0
   best: 0
+  status: 0
 --- !u!1 &1443385969
 GameObject:
   m_ObjectHideFlags: 0
@@ -2399,7 +2397,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1583016764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2416,8 +2414,6 @@ MonoBehaviour:
   - {fileID: 1894327656350938083, guid: f6608a975e33c1f498c5c275fae5b565, type: 3}
   currentLevelID: 1
   level: {fileID: 0}
-  currentplayer: {fileID: 0}
-  unitManager: {fileID: 0}
 --- !u!4 &1583016765
 Transform:
   m_ObjectHideFlags: 0
@@ -2727,51 +2723,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1897713287}
   m_CullTransparentMesh: 1
---- !u!1 &1918541581
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1918541583}
-  - component: {fileID: 1918541582}
-  m_Layer: 0
-  m_Name: PipelineManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &1918541582
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1918541581}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 790faf825da54404296cf49aabeea0af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  template: {fileID: 60337893401421806, guid: e1e3fcb12cefbc147b1587b7fb7380ad, type: 3}
---- !u!4 &1918541583
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1918541581}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1960997798
 GameObject:
   m_ObjectHideFlags: 0
@@ -3135,6 +3086,5 @@ SceneRoots:
   - {fileID: 189396278}
   - {fileID: 1426102880}
   - {fileID: 276291173}
-  - {fileID: 1918541583}
   - {fileID: 1583016765}
   - {fileID: 139767946}

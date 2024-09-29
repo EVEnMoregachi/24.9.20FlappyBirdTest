@@ -172,7 +172,7 @@ Transform:
   m_GameObject: {fileID: 4017301175777817981}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.19699998, y: -0.11499997, z: 0}
+  m_LocalPosition: {x: -0.05, y: -0.176, z: 0}
   m_LocalScale: {x: 0.17545524, y: 0.17545524, z: 0.17545524}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -625,7 +625,7 @@ Transform:
   m_GameObject: {fileID: 8579743649838492630}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 0.0058945366, y: -0.19447361, z: 0}
+  m_LocalPosition: {x: 0.014, y: -0.053, z: 0}
   m_LocalScale: {x: 0.16273472, y: 0.16273472, z: 0.16273472}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -871,7 +871,7 @@ MonoBehaviour:
   target: {fileID: 0}
   FireRate2: 0.25
   FireRate3: 0.2
-  rushCD: 15
+  rushCD: 10
   MAX_HP: 3000
 --- !u!1001 &6046036405091928580
 PrefabInstance:

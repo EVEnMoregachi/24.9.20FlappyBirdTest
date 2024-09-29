@@ -13,10 +13,5 @@ public class Bullet3 : Bul
     public override void OnUpdate()
     {
         this.transform.position += ret * speed * Time.deltaTime;
-
-        if (Screen.safeArea.Contains(Camera.main.WorldToScreenPoint(this.transform.position)) == false)
-        {
-            Destroy(this.gameObject, 1f);
-        }
     }
 }
